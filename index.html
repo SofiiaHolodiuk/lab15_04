@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 4: Шифрування</title>
+    <script>
+        function encryptText() {
+            let inputText = document.getElementById('inputText').value;
+            let words = inputText.split(/\s+/); // Розділяємо текст на слова
+            let encryptedWords = words.map(word => {
+                if (word.length > 2) {
+                    // Якщо слово більше ніж 2 літери, перемішуємо букви
+                    let middle = word.slice(1, -1); // Вибираємо все, крім першої та останньої літери
+                    middle = middle.split('').sort(() => Math.random() - 0.5).join(''); // Перемішуємо середину
+                    return word[0] + middle + word[word.length - 1]; // Формуємо нове слово
+                } else {
+                    return word; // Якщо слово складається з 2 чи 1 літери, не змінюємо
+                }
+            });
+
+            // Збираємо зашифрований текст
+            let encryptedText = encryptedWords.join(' ');
+
+            // Виводимо результат
+            document.getElementById('result').innerText = `Зашифрований текст: ${encryptedText}`;
+        }
+    </script>
+</head>
+<body>
+    <h1>Завдання 4: Шифрування</h1>
+    <label for="inputText">Введіть текст для шифрування: </label>
+    <textarea id="inputText" rows="4" cols="50"></textarea><br><br>
+    <button onclick="encryptText()">Зашифрувати</button>
+    <pre id="result"></pre>
+</body>
+</html>
